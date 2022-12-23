@@ -405,10 +405,8 @@ void Option_Passport(INVENTORY_ITEM *inv_item)
     case PASSPORT_PAGE_1:
         Text_Hide(m_Text[TEXT_LEFT_ARROW], true);
         if (m_PassportMode == PASSPORT_MODE_SHOW_SAVES) {
-            Difficulty_Select(DIFFICULTY_SELECT_IN_BACKGROUND);
             Option_PassportLoadGame();
         } else if (m_PassportMode == PASSPORT_MODE_SELECT_LEVEL) {
-            Difficulty_Select(DIFFICULTY_SELECT_IN_BACKGROUND);
             Option_PassportSelectLevel();
         } else if (m_PassportMode == PASSPORT_MODE_FLIP) {
             Difficulty_Select(DIFFICULTY_SELECT_WAITING_INPUT);
@@ -435,7 +433,6 @@ void Option_Passport(INVENTORY_ITEM *inv_item)
 
     case PASSPORT_PAGE_2:
         if (m_PassportMode == PASSPORT_MODE_NEW_GAME) {
-            Difficulty_Select(DIFFICULTY_SELECT_IN_BACKGROUND);
             Option_PassportShowNewGame();
         } else if (m_PassportMode == PASSPORT_MODE_SHOW_SAVES) {
             Option_PassportShowSaves();

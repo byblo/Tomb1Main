@@ -146,8 +146,6 @@ void Difficulty_Select(int16_t difficulty_select_mode)
         Text_SetScale(m_Text, PHD_ONE * 0.95, PHD_ONE * 0.95);
         break;
     case DIFFICULTY_SELECT_IN_BACKGROUND:
-        return; // ugly but temporary fix agaisnt overlapping text with
-                // savegames list. WIP
         Text_Hide(m_Text, false);
         Text_SetScale(m_Text, PHD_ONE * 0.88, PHD_ONE * 0.88);
         return;
