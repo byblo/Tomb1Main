@@ -108,6 +108,7 @@ typedef struct {
 
     struct {
         int32_t layout;
+        int32_t cntlr_layout;
     } input;
 
     struct {
