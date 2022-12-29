@@ -17,3 +17,5 @@ void Difficulty_GetTextStat_NoHeader(
     char *str, float damages_to_lara_multiplier);
 
 void Difficulty_Select(int16_t difficulty_select_mode);
+
+int16_t Difficulty_GetAmmo(int16_t ammo_qty, int8_t ammo_bundle);
