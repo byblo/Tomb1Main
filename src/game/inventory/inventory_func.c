@@ -1,3 +1,4 @@
+#include "game/difficulty.h"
 #include "game/inventory.h"
 #include "game/inventory/inventory_vars.h"
 #include "game/items.h"
@@ -38,9 +39,11 @@ bool Inv_AddItem(int32_t item_num)
     case O_SHOTGUN_OPTION:
         for (int i = Inv_RequestItem(O_SG_AMMO_ITEM); i > 0; i--) {
             Inv_RemoveItem(O_SG_AMMO_ITEM);
-            g_Lara.shotgun.ammo += SHOTGUN_AMMO_QTY;
+            g_Lara.shotgun.ammo +=
+                Difficulty_GetAmmo(SHOTGUN_AMMO_QTY, SHOTGUN_AMMO_CLIP);
         }
-        g_Lara.shotgun.ammo += SHOTGUN_AMMO_QTY;
+        g_Lara.shotgun.ammo +=
+            Difficulty_GetAmmo(SHOTGUN_AMMO_QTY, SHOTGUN_AMMO_CLIP);
         Inv_InsertItem(&g_InvItemShotgun);
         Item_GlobalReplace(O_SHOTGUN_ITEM, O_SG_AMMO_ITEM);
         return false;
@@ -49,9 +52,9 @@ bool Inv_AddItem(int32_t item_num)
     case O_MAGNUM_OPTION:
         for (int i = Inv_RequestItem(O_MAG_AMMO_ITEM); i > 0; i--) {
             Inv_RemoveItem(O_MAG_AMMO_ITEM);
-            g_Lara.magnums.ammo += MAGNUM_AMMO_QTY;
+            g_Lara.magnums.ammo += Difficulty_GetAmmo(MAGNUM_AMMO_QTY, 2);
         }
-        g_Lara.magnums.ammo += MAGNUM_AMMO_QTY;
+        g_Lara.magnums.ammo += Difficulty_GetAmmo(MAGNUM_AMMO_QTY, 2);
         Inv_InsertItem(&g_InvItemMagnum);
         Item_GlobalReplace(O_MAGNUM_ITEM, O_MAG_AMMO_ITEM);
         return false;
@@ -60,9 +63,9 @@ bool Inv_AddItem(int32_t item_num)
     case O_UZI_OPTION:
         for (int i = Inv_RequestItem(O_UZI_AMMO_ITEM); i > 0; i--) {
             Inv_RemoveItem(O_UZI_AMMO_ITEM);
-            g_Lara.uzis.ammo += UZI_AMMO_QTY;
+            g_Lara.uzis.ammo += Difficulty_GetAmmo(UZI_AMMO_QTY, 2);
         }
-        g_Lara.uzis.ammo += UZI_AMMO_QTY;
+        g_Lara.uzis.ammo += Difficulty_GetAmmo(UZI_AMMO_QTY, 2);
         Inv_InsertItem(&g_InvItemUzi);
         Item_GlobalReplace(O_UZI_ITEM, O_UZI_AMMO_ITEM);
         return false;
@@ -70,7 +73,8 @@ bool Inv_AddItem(int32_t item_num)
     case O_SG_AMMO_ITEM:
     case O_SG_AMMO_OPTION:
         if (Inv_RequestItem(O_SHOTGUN_ITEM)) {
-            g_Lara.shotgun.ammo += SHOTGUN_AMMO_QTY;
+            g_Lara.shotgun.ammo +=
+                Difficulty_GetAmmo(SHOTGUN_AMMO_QTY, SHOTGUN_AMMO_CLIP);
         } else {
             Inv_InsertItem(&g_InvItemShotgunAmmo);
         }
@@ -79,7 +83,7 @@ bool Inv_AddItem(int32_t item_num)
     case O_MAG_AMMO_ITEM:
     case O_MAG_AMMO_OPTION:
         if (Inv_RequestItem(O_MAGNUM_ITEM)) {
-            g_Lara.magnums.ammo += MAGNUM_AMMO_QTY;
+            g_Lara.magnums.ammo += Difficulty_GetAmmo(MAGNUM_AMMO_QTY, 2);
         } else {
             Inv_InsertItem(&g_InvItemMagnumAmmo);
         }
@@ -88,7 +92,7 @@ bool Inv_AddItem(int32_t item_num)
     case O_UZI_AMMO_ITEM:
     case O_UZI_AMMO_OPTION:
         if (Inv_RequestItem(O_UZI_ITEM)) {
-            g_Lara.uzis.ammo += UZI_AMMO_QTY;
+            g_Lara.uzis.ammo += Difficulty_GetAmmo(UZI_AMMO_QTY, 2);
         } else {
             Inv_InsertItem(&g_InvItemUziAmmo);
         }
