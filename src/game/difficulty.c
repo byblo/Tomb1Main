@@ -7,6 +7,7 @@
 #include "global/const.h"
 #include "global/types.h"
 #include "global/vars.h"
+#include "math/math.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -120,9 +121,9 @@ void Difficulty_Select(int16_t difficulty_select_mode)
     case DIFFICULTY_SELECT_INIT:
         next_damages_to_lara_multiplier = g_Config.damages_to_lara_multiplier;
         Difficulty_GetTextStat_NoHeader(buf, next_damages_to_lara_multiplier);
-        m_Text = Text_Create(0, -54, buf);
-        m_Text_moreup = Text_Create(0, -69, "[");
-        m_Text_moredown = Text_Create(0, -44, "]");
+        m_Text = Text_Create(0, -52, buf);
+        m_Text_moreup = Text_Create(0, -65, "\203");
+        m_Text_moredown = Text_Create(0, -40, "\202");
         Text_Hide(m_Text, true);
         Text_Hide(m_Text_moreup, true);
         Text_Hide(m_Text_moredown, true);
@@ -133,8 +134,8 @@ void Difficulty_Select(int16_t difficulty_select_mode)
         Text_CentreH(m_Text_moreup, 1);
         Text_CentreH(m_Text_moredown, 1);
         Text_SetScale(m_Text, PHD_ONE * 0.95, PHD_ONE * 0.95);
-        Text_SetScale(m_Text_moreup, PHD_ONE * 0.55, PHD_ONE * 0.55);
-        Text_SetScale(m_Text_moredown, PHD_ONE * 0.55, PHD_ONE * 0.55);
+        Text_SetScale(m_Text_moreup, PHD_ONE * 0.75, PHD_ONE * 0.75);
+        Text_SetScale(m_Text_moredown, PHD_ONE * 0.75, PHD_ONE * 0.75);
         break;
     case DIFFICULTY_SELECT_HIDEALL:
         Text_Hide(m_Text, true);
@@ -199,4 +200,18 @@ void Difficulty_Select(int16_t difficulty_select_mode)
             Text_ChangeText(m_Text, buf);
         }
     }
+}
+
+int16_t Difficulty_GetAmmo(int16_t ammo_qty, int8_t ammo_bundle)
+{
+    int16_t ammo =
+        (int16_t)((ammo_qty / ammo_bundle) / ((float)Math_Sqrt(10000 * g_Config.damages_to_lara_multiplier) / 100));
+    ammo *= ammo_bundle;
+
+    if (ammo < ammo_bundle) {
+        ammo = ammo_bundle; // just in case but this should never happens anyway
+    }
+    // LOG_INFO(" ... Difficulty_GetAmmo(%d, %d) = return ammo:%d", ammo_qty,
+    // ammo_bundle, ammo);
+    return ammo;
 }
