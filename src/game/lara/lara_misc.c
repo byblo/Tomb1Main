@@ -578,12 +578,10 @@ bool Lara_LandedBad(ITEM_INFO *item, COLL_INFO *coll)
     } else {
         item->hit_points -= ((LARA_HITPOINTS * landspeed * landspeed)
                              / (DAMAGE_LENGTH * DAMAGE_LENGTH))
-            * g_Config
-                  .damages_to_lara_multiplier; // g_Config.damages_to_lara_multiplier
-                                               // is required here to prevent
-                                               // lara dying later at lara.c
-                                               // without playing the death
-                                               // landing animation
+            * ((float)Math_Sqrt(10000 * g_Config.damages_to_lara_multiplier)
+               / 100);
+        // g_Config.damages_to_lara_multiplier is required here to prevent lara
+        // dying later at lara.c without playing the death landing animation
     }
     g_Lara.old_hit_points = item->hit_points; // important
 
