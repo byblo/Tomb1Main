@@ -1535,6 +1535,7 @@ typedef struct LARA_INFO {
         bool is_moving;
     } interact_target;
     int16_t old_hit_points;
+    int16_t poisoned_damage;
 } LARA_INFO;
 
 typedef struct GAME_STATS {

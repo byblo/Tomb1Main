@@ -28,6 +28,9 @@ void Dart_Control(int16_t item_num)
     if (item->touch_bits) {
         g_LaraItem->hit_points -= 50;
         g_LaraItem->hit_status = 1;
+        if (g_Config.damages_to_lara_multiplier > 1) { // poisoned dart
+            g_Lara.poisoned_damage = 760;
+        }
         Effect_Blood(
             item->pos.x, item->pos.y, item->pos.z, g_LaraItem->speed,
             g_LaraItem->pos.y_rot, g_LaraItem->room_number);
