@@ -162,12 +162,6 @@ void Lara_Control(void)
         g_Lara.torso_y_rot = 0;
     }
 
-    // poisoning damages
-    if (g_Lara.poisoned_damage > 0) {
-        g_Lara.poisoned_damage -= (int16_t)g_Config.damages_to_lara_multiplier;
-        item->hit_points -= 1;
-    }
-
     // difficulty variable to multiply damages on Lara. Skips if: demo mode,
     // Lara HP <= 0, previous Lara HP <= current Lara HP
     if (g_GameInfo.current_level_type != GFL_DEMO && item->hit_points > 0
@@ -177,6 +171,11 @@ void Lara_Control(void)
         item->hit_points = g_Lara.old_hit_points
             - (int16_t)(diff_lara_hit_points
                         * g_Config.damages_to_lara_multiplier);
+    }
+    // poisoning damages
+    if (g_Lara.poisoned_damage > 0) {
+        g_Lara.poisoned_damage -= 3;
+        item->hit_points -= 3;
     }
     g_Lara.old_hit_points = item->hit_points; // important
 
